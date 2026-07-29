@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fail & Solution Lab — El error deja de ser tu problema, es tu solución</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #2F4156; --teal: #567C8D; --skyblue: #C8D9E6; --beige: #F5EFEB; --white: #FFFFFF; --text-body: #4a5a6a; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--skyblue); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--navy); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 14px; color: var(--teal); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { background: var(--navy); color: var(--white); border: none; padding: 10px 22px; border-radius: 50px; font-size: 14px; cursor: pointer; font-weight: 500; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--teal); }
+    .hero { background: var(--beige); padding: 7rem 3rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero-blob { position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 450px; background: var(--skyblue); border-radius: 50%; opacity: 0.3; z-index: 0; }
+    .hero-inner { position: relative; z-index: 1; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 900; color: var(--navy); line-height: 1.1; max-width: 720px; margin: 0 auto 1.25rem; }
+    .hero h1 span { color: var(--teal); }
+    .hero-sub { font-size: 18px; color: var(--text-body); line-height: 1.7; max-width: 540px; margin: 0 auto 2.5rem; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--navy); color: var(--white); border: none; padding: 14px 32px; border-radius: 50px; font-size: 15px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--teal); }
+    .btn-secondary { background: transparent; color: var(--navy); border: 2px solid var(--navy); padding: 14px 32px; border-radius: 50px; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-secondary:hover { background: var(--navy); color: var(--white); }
+    .section { padding: 5rem 3rem; }
+    .section-inner { max-width: 800px; margin: 0 auto; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 1.5rem; }
+    .section-body { font-size: 16px; color: var(--text-body); line-height: 1.85; margin-bottom: 1rem; }
+    .about-question { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 2rem; }
+    .about-close { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); font-style: italic; margin-top: 2rem; padding-left: 1.25rem; border-left: 4px solid var(--teal); line-height: 1.5; }
+    .phil-bg { background: var(--beige); }
+    .phil-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-top: 2rem; }
+    .phil-card { background: var(--white); border-radius: 16px; padding: 1.5rem; }
+    .phil-icon { font-size: 28px; margin-bottom: 12px; }
+    .phil-card h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+    .phil-card p { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+    .services-bg { background: var(--navy); }
+    .services-bg .eyebrow { color: var(--skyblue); }
+    .services-bg .section-title { color: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px; margin-top: 2rem; }
+    .service-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(200,217,230,0.2); border-radius: 16px; padding: 1.75rem; transition: background 0.2s; }
+    .service-card:hover { background: rgba(255,255,255,0.12); }
+    .service-num { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--skyblue); margin-bottom: 10px; }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .service-tag { font-size: 13px; color: var(--skyblue); font-style: italic; margin-bottom: 12px; }
+    .service-card p { font-size: 14px; color: rgba(200,217,230,0.85); line-height: 1.7; }
+    .service-feats { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .feat { font-size: 11px; color: var(--skyblue); background: rgba(200,217,230,0.12); border: 1px solid rgba(200,217,230,0.25); border-radius: 50px; padding: 4px 12px; font-weight: 500; }
+    .recursos-bg { background: var(--beige); }
+    .tabs-nav { display: flex; border-bottom: 2px solid var(--skyblue); margin-bottom: 2.5rem; }
+    .tab-btn { background: none; border: none; border-bottom: 3px solid transparent; padding: 12px 28px; font-size: 15px; color: var(--teal); cursor: pointer; margin-bottom: -2px; font-family: 'Inter', sans-serif; font-weight: 500; }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .book-card { background: var(--white); border-radius: 14px; padding: 1.4rem; }
+    .book-card h4 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .book-author { font-size: 13px; color: var(--teal); margin-bottom: 8px; font-weight: 500; }
+    .book-card p { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+    .pod-list { display: flex; flex-direction: column; gap: 12px; }
+    .pod-item { background: var(--white); border-radius: 14px; padding: 1.2rem 1.5rem; display: flex; align-items: flex-start; gap: 14px; }
+    .pod-icon { font-size: 24px; flex-shrink: 0; }
+    .pod-item h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .pod-item p { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+    .blog-intro { font-size: 16px; color: var(--text-body); line-height: 1.8; margin-bottom: 2rem; }
+    .blog-form { background: var(--white); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; }
+    .blog-form h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
+    .blog-form input, .blog-form textarea, .blog-form select { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1.5px solid var(--skyblue); background: var(--beige); color: var(--navy); font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 12px; outline: none; }
+    .blog-form textarea { min-height: 110px; resize: vertical; }
+    .blog-submit { background: var(--navy); color: var(--white); border: none; padding: 12px 28px; border-radius: 50px; font-size: 14px; cursor: pointer; font-weight: 600; }
+    .post-card { background: var(--white); border-radius: 14px; padding: 1.4rem; margin-bottom: 12px; }
+    .post-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+    .post-anon { font-size: 11px; color: var(--teal); background: var(--skyblue); padding: 3px 12px; border-radius: 50px; font-weight: 600; }
+    .post-industry { font-size: 12px; color: var(--text-body); }
+    .post-card p { font-size: 14px; color: var(--text-body); line-height: 1.7; font-style: italic; }
+    .contacto-bg { background: var(--teal); }
+    .contacto-bg .eyebrow { color: var(--skyblue); }
+    .contacto-bg .section-title { color: var(--white); }
+    .contacto-bg .section-body { color: rgba(255,255,255,0.8); }
+    .contact-form { display: flex; flex-direction: column; gap: 12px; margin-top: 1.75rem; }
+    .contact-form input, .contact-form textarea { padding: 14px 18px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: var(--white); font-size: 15px; font-family: 'Inter', sans-serif; outline: none; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.55); }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .contact-submit { background: var(--white); color: var(--teal); border: none; padding: 14px 32px; border-radius: 50px; font-size: 15px; cursor: pointer; font-weight: 700; align-self: flex-start; }
+    footer { background: var(--navy); padding: 2rem 3rem; text-align: center; }
+    footer p { font-size: 13px; color: var(--skyblue); }
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 5rem 1.5rem 4rem; }
+      .hero h1 { font-size: 38px; }
+      .section { padding: 3.5rem 1.5rem; }
+      .section-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Fail & Solution Lab</div>
+  <div class="nav-links">
+    <a href="#about">Nosotras</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#recursos">Recursos</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Agendá una llamada</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Fail & Solution Lab</div>
+    <h1>El error deja de ser tu problema,<br><span>es tu solución.</span></h1>
+    <p class="hero-sub">Ayudamos a organizaciones y líderes a transformar la relación con el error: de amenaza silenciada a la fuente más honesta de aprendizaje, innovación y ventaja competitiva.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Agendá una llamada</button>
+      <button class="btn-secondary" onclick="document.getElementById('servicios').scrollIntoView({behavior:'smooth'})">Conocé la metodología</button>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="about">
+  <div class="section-inner">
+    <div class="eyebrow">Quiénes somos</div>
+    <div class="about-question">¿Te da miedo equivocarte en el trabajo?</div>
+    <p class="section-body">A nosotras también nos pasó.</p>
+    <p class="section-body">Trabajamos en organizaciones donde equivocarse tenía consecuencias. Donde la cultura decía "tomá riesgos" pero la realidad era otra: un error y te retaban, dos errores y el miedo se instalaba para quedarse — aprendías rápido que era mejor callarse que arriesgarse a equivocarse de nuevo.</p>
+    <p class="section-body">Y lo peor no era el miedo en sí. Lo peor era ver lo que ese miedo le hacía a los equipos. Personas brillantes que dejaban de participar. Líderes que querían hacer las cosas diferente pero no tenían las herramientas para lograrlo. Organizaciones que repetían los mismos errores una y otra vez porque nadie se animaba a hablar de ellos.</p>
+    <p class="section-body">En algún momento nos preguntamos: ¿y si el problema no es el error? ¿Y si el problema es lo que hacemos con él?</p>
+    <p class="section-body">De esa pregunta nació Fail & Solution Lab. Hoy acompañamos a organizaciones y líderes a transformar su relación con el error. No desde la teoría, sino desde la experiencia de haberlo vivido.</p>
+    <div class="about-close">Porque el error no tiene que ser tu problema. Con nosotras, es tu solución.</div>
+  </div>
+</div>
+
+<div class="section phil-bg">
+  <div class="section-inner">
+    <div class="eyebrow">Nuestra filosofía</div>
+    <div class="section-title">¿Por qué el error es tu mayor activo?</div>
+    <div class="phil-grid">
+      <div class="phil-card">
+        <div class="phil-icon">🧠</div>
+        <h3>Growth mindset</h3>
+        <p>Equipos que ven el error como parte natural del crecimiento.</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-icon">🔄</div>
+        <h3>Lifelong learning</h3>
+        <p>Organizaciones que convierten cada falla en conocimiento colectivo.</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-icon">🛡️</div>
+        <h3>Seguridad psicológica</h3>
+        <p>Entornos donde hablar del error es seguro y productivo.</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-icon">📈</div>
+        <h3>Impacto medible</h3>
+        <p>Resultados concretos que demuestran el ROI de la transformación cultural.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section services-bg" id="servicios">
+  <div class="section-inner">
+    <div class="eyebrow">Metodología</div>
+    <div class="section-title">Qué hacemos</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">Etapa 1 — Diagnóstico</div>
+        <h3>Failure Survey</h3>
+        <div class="service-tag">Antes de cambiar, entendé dónde estás.</div>
+        <p>Medimos el estado actual de la cultura de error: frecuencia, impacto, gestión y nivel de seguridad psicológica. El resultado es un reporte con focos de mejora y línea de base.</p>
+        <div class="service-feats"><span class="feat">Encuesta anónima</span><span class="feat">Reporte ejecutivo</span><span class="feat">Métricas baseline</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">Etapa 2 — Formación</div>
+        <h3>Workshops in-company</h3>
+        <div class="service-tag">El error real de tu equipo, convertido en aprendizaje real.</div>
+        <p>Talleres presenciales o virtuales adaptados a cada organización. Trabajamos sobre casos reales de error, identificando causas raíz y construyendo planes de acción concretos.</p>
+        <div class="service-feats"><span class="feat">Presencial o virtual</span><span class="feat">Casos reales</span><span class="feat">Plan de acción</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">Etapa 3 — Implementación</div>
+        <h3>Programa de acompañamiento</h3>
+        <div class="service-tag">Que el cambio no se quede en el taller.</div>
+        <p>Intervención de mediano plazo que asegura que los cambios en comportamientos y prácticas se sostengan en el tiempo y se traduzcan en resultados medibles.</p>
+        <div class="service-feats"><span class="feat">Seguimiento</span><span class="feat">Medición continua</span><span class="feat">Ajuste metodológico</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">Etapa 4 — Certificación</div>
+        <h3>Certificación de líderes</h3>
+        <div class="service-tag">Que la metodología viva dentro de tu organización.</div>
+        <p>Formamos facilitadores internos para replicar la metodología de manera autónoma. Instala un marco común y reduce la dependencia de la intervención externa.</p>
+        <div class="service-feats"><span class="feat">Marco común</span><span class="feat">Facilitadores internos</span><span class="feat">ROI largo plazo</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section recursos-bg" id="recursos">
+  <div class="section-inner">
+    <div class="eyebrow">Recursos & comunidad</div>
+    <div class="section-title">Aprendé, escuchá y compartí</div>
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('libros', this)">Libros</button>
+      <button class="tab-btn" onclick="switchTab('podcasts', this)">Podcasts</button>
+      <button class="tab-btn" onclick="switchTab('comunidad', this)">Comunidad</button>
+    </div>
+    <div class="tab-content active" id="tab-libros">
+      <div class="book-grid">
+        <div class="book-card"><h4>The Fearless Organization</h4><div class="book-author">Amy Edmondson</div><p>La referencia en seguridad psicológica. Cómo crear equipos donde el error se puede hablar sin miedo.</p></div>
+        <div class="book-card"><h4>Mindset</h4><div class="book-author">Carol Dweck</div><p>El libro fundacional del growth mindset. Por qué la forma en que vemos el error lo cambia todo.</p></div>
+        <div class="book-card"><h4>Black Box Thinking</h4><div class="book-author">Matthew Syed</div><p>Cómo las organizaciones más exitosas convierten el error en un sistema de aprendizaje continuo.</p></div>
+        <div class="book-card"><h4>Dare to Lead</h4><div class="book-author">Brené Brown</div><p>Vulnerabilidad y liderazgo. Por qué los mejores líderes no le temen al error.</p></div>
+        <div class="book-card"><h4>The Fifth Discipline</h4><div class="book-author">Peter Senge</div><p>El clásico del aprendizaje organizacional. Cómo construir organizaciones que aprenden.</p></div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-podcasts">
+      <div class="pod-list">
+        <div class="pod-item"><div class="pod-icon">🎙️</div><div><h4>How I Built This — Guy Raz</h4><p>Historias reales de founders donde el fracaso y el error son parte central del camino al éxito.</p></div></div>
+        <div class="pod-item"><div class="pod-icon">🎙️</div><div><h4>Worklife — Adam Grant</h4><p>Psicología del trabajo, equipos y cultura organizacional. Siempre basado en evidencia.</p></div></div>
+        <div class="pod-item"><div class="pod-icon">🎙️</div><div><h4>The Tim Ferriss Show</h4><p>Entrevistas en profundidad donde el fracaso, el aprendizaje y la resiliencia son protagonistas.</p></div></div>
+        <div class="pod-item"><div class="pod-icon">🎙️</div><div><h4>Dare to Lead — Brené Brown</h4><p>Liderazgo, cultura y vulnerabilidad. Para líderes que quieren construir equipos más humanos.</p></div></div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-comunidad">
+      <p class="blog-intro">Este es un espacio para compartir tus errores y aprender de los de otros. Podés hacerlo de forma anónima o con tu nombre. Porque cuando normalizamos hablar del error, todos crecemos.</p>
+      <div class="blog-form">
+        <h3>Compartí tu experiencia</h3>
+        <input type="text" placeholder="Nombre o apodo (opcional)" />
+        <select><option value="">¿En qué industria trabajás?</option><option>Tecnología</option><option>Recursos Humanos</option><option>Finanzas</option><option>Salud</option><option>Educación</option><option>Retail</option><option>Otra</option></select>
+        <textarea placeholder="Contanos tu error y qué aprendiste de él..."></textarea>
+        <button class="blog-submit">Compartir</button>
+      </div>
+      <div class="post-card"><div class="post-meta"><span class="post-anon">Anónimo</span><span class="post-industry">Tecnología</span></div><p>"Lancé un feature sin testear con usuarios reales. Fue un fracaso total. Aprendí que la velocidad sin validación no es agilidad, es imprudencia."</p></div>
+      <div class="post-card"><div class="post-meta"><span class="post-anon">Anónimo</span><span class="post-industry">Recursos Humanos</span></div><p>"Implementé un proceso nuevo sin involucrar al equipo. La resistencia fue enorme. Hoy entiendo que el cambio sin co-construcción no dura."</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="section contacto-bg" id="contacto">
+  <div class="section-inner">
+    <div class="eyebrow">Contacto</div>
+    <div class="section-title">¿Empezamos?</div>
+    <p class="section-body">Contanos en qué etapa está tu organización y te proponemos el punto de entrada ideal.</p>
+    <div class="contact-form">
+      <input type="text" placeholder="Tu nombre" />
+      <input type="text" placeholder="Empresa" />
+      <input type="email" placeholder="Email de contacto" />
+      <textarea placeholder="¿Qué está pasando en tu organización con el error?"></textarea>
+      <button class="contact-submit">Enviar consulta</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Fail & Solution Lab — El error deja de ser tu problema, es tu solución.</p>
+</footer>
+
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
